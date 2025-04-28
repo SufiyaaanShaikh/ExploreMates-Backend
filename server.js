@@ -12,7 +12,12 @@ import { messageRoutes } from "./routes/message.routes.js";
 
 dotenv.config({ path: "./.env" });
 const app = express();
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
+    credentials: true,
+  })
+);
 
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(express.json({ limit: "10mb" }));
@@ -39,4 +44,3 @@ const PORT = process.env.PORT || 5017;
     console.error(err);
   }
 })();
-

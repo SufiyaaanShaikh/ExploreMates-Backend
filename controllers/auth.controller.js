@@ -5,7 +5,6 @@ import { ApiRes } from "../utils/ApiRes.js";
 
 export const signUp = asyncWrapper(async (req, res, next) => {
   const { name, email, password, userType } = req.body;
-  console.log(userType)
   const user = new User({
     name,
     email,
