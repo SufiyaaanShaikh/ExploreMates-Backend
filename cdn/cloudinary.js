@@ -34,11 +34,9 @@ export const deleteFromCloudinary = async (fileID) => {
   try {
     // Upload an image
     const result = await cloudinary.uploader.destroy(fileID)
-    // console.log("File Uploaded", uploadResult);
-    // fs.unlinkSync(file);
+
     return result;
   } catch (error) {
-    // fs.unlinkSync(file);
     console.error("Error Deleting File", error);
     return null;
   }
