@@ -9,12 +9,13 @@ import { userRoutes } from "./routes/user.routes.js";
 import { tripRoutes } from "./routes/trip.routes.js";
 import { reviewRoutes } from "./routes/review.routes.js";
 import { messageRoutes } from "./routes/message.routes.js";
+import { destinationRoutes } from "./routes/destination.routes.js";
 
 dotenv.config({ path: "./.env" });
 const app = express();
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, "https://explore-mate-live.vercel.app"],
+    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );
@@ -29,6 +30,10 @@ app.use("/api/user", userRoutes);
 app.use("/api/trips", tripRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/destination", destinationRoutes);
+app.get("/", (req, res) => {
+  res.send("Welcome to the Travel App API!");
+});
 
 app.use(globalErrorHandler);
 const PORT = process.env.PORT || 5017;

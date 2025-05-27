@@ -13,15 +13,15 @@ import { verifyUser } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 // All routes are protected with auth middleware
-router.use(verifyUser);
+// router.use(verifyUser);
 
 // Trip routes
-router.get("/", getUserTrips);
+router.get("/",verifyUser, getUserTrips);
 router.get("/all", getAllTrips); // Move this BEFORE the /:tripId route
 router.get("/user/:userId", getTripsForUser);
 router.get("/:tripId", getTripById);
-router.post("/", createTrip);
-router.put("/:tripId", updateTrip);
-router.delete("/:tripId", deleteTrip);
+router.post("/",verifyUser, createTrip);
+router.put("/:tripId",verifyUser, updateTrip);
+router.delete("/:tripId",verifyUser, deleteTrip);
 
 export const tripRoutes = router;

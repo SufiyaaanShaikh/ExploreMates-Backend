@@ -14,15 +14,15 @@ import { upload } from "../middleware/upload.middleware.js";
 const router = express.Router();
 
 // All routes are protected with auth middleware
-router.use(verifyUser);
+// router.use(verifyUser);
 
 // User routes with clear, RESTful design
 router.get("/", getAllUsers);
-router.get("/me", getCurrentUser);
+router.get("/me",verifyUser, getCurrentUser);
 router.get("/:id", getSingleUser);
-router.put("/follow/:id", followUser);
-router.put("/update-profile", upload.single("profile") , updateProfile);
+router.put("/follow/:id",verifyUser, followUser);
+router.put("/update-profile",verifyUser, upload.single("profile") , updateProfile);
 // router.put("/update-password", updatePassword);
-router.delete("/delete/:id", deleteUser);
-router.put("/change-password", changePassword);
+router.delete("/delete/:id",verifyUser, deleteUser);
+router.put("/change-password",verifyUser, changePassword);
 export const userRoutes = router;

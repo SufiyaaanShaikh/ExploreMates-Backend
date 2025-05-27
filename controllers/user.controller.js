@@ -65,7 +65,7 @@ export const getSingleUser = asyncWrapper(async (req, res) => {
 });
 
 export const followUser = asyncWrapper(async (req, res) => {
-  if (req.user._id === req.params.id) {
+  if (req.user._id == req.params.id) {
     throw new ApiError(400, "You cannot follow yourself");
   }
 
@@ -214,23 +214,23 @@ export const deleteUser = asyncWrapper(async (req, res) => {
 // Update this function in user.controller.js
 export const changePassword = asyncWrapper(async (req, res) => {
   const { email, newPassword } = req.body;
-  
+
   // Validate that the email matches the logged in user
   if (email !== req.user.email) {
     throw new ApiError(403, "Email doesn't match with logged in user");
   }
-  
+
   // Find the user
   const user = await User.findById(req.user._id);
   if (!user) {
     throw new ApiError(404, "User not found");
   }
-  
+
   // Update password directly - no current password check
   user.password = newPassword;
   await user.save();
-  
-  return res.status(200).json(
-    new ApiRes(200, null, true, "Password changed successfully")
-  );
+
+  return res
+    .status(200)
+    .json(new ApiRes(200, null, true, "Password changed successfully"));
 });

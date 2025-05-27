@@ -14,15 +14,15 @@ import { upload } from "../middleware/upload.middleware.js";
 const router = express.Router();
 
 // Apply authentication middleware to all routes
-router.use(verifyUser);
+// router.use(verifyUser);
 
 // Review routes
-router.post("/", upload.single("reviewPhoto"), createReview);
-router.get("/me", getMyReviews);
+router.post("/",verifyUser, upload.single("reviewPhoto"), createReview);
+router.get("/me",verifyUser, getMyReviews);
 router.get("/user/:userId", getUserReviews);
 router.get("/all", getAllReviews);
 router.get("/:reviewId", getReviewById);
-router.delete("/:reviewId", deleteReview);
-router.put("/:reviewId", upload.single("reviewPhoto"), updateReview);
+router.delete("/:reviewId",verifyUser, deleteReview);
+router.put("/:reviewId",verifyUser, upload.single("reviewPhoto"), updateReview);
 
 export const reviewRoutes = router;
