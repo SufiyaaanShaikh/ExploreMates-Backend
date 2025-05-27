@@ -1,8 +1,8 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-export const uploadonCloudinary = async (file) => {
-    if(!file) return;
+export const uploadonCloudinary = async (fileBuffer, mimeType) => {
+   if (!fileBuffer) return null;
   // Configuration
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,14 +11,16 @@ export const uploadonCloudinary = async (file) => {
   });
   try {
     // Upload an image
-    const uploadResult = await cloudinary.uploader.upload(file, {
+    const base64Data = Buffer.from(fileBuffer).toString('base64');
+    const dataURI = `data:${mimeType};base64,${base64Data}`;
+    
+    // Upload to Cloudinary using buffer
+    const uploadResult = await cloudinary.uploader.upload(dataURI, {
       resource_type: "auto",
     });
-    // console.log("File Uploaded", uploadResult);
-    fs.unlinkSync(file);
+    
     return uploadResult;
   } catch (error) {
-    fs.unlinkSync(file);
     console.error("Error Uploading File", error);
     return null;
   }
