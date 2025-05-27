@@ -133,8 +133,10 @@ export const updateProfile = asyncWrapper(async (req, res) => {
   // Handle file upload if a new profile photo was uploaded
   if (req.file) {
     // Upload new image to Cloudinary
-    const uploadResult = await uploadonCloudinary(  req.file.buffer,
-          req.file.mimetype);
+    const uploadResult = await uploadonCloudinary(
+      req.file.buffer,
+      req.file.mimetype
+    );
 
     if (!uploadResult) {
       throw new ApiError(500, "Failed to upload profile photo");

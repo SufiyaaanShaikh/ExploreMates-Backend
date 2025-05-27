@@ -40,7 +40,10 @@ export const createReview = asyncWrapper(async (req, res) => {
   // Handle file upload if a photo was provided
   if (req.file) {
     // Upload image to Cloudinary
-    const uploadResult = await uploadonCloudinary(req.file.path);
+    const uploadResult = await uploadonCloudinary(
+      req.file.buffer,
+      req.file.mimetype
+    );
 
     if (!uploadResult) {
       throw new ApiError(500, "Failed to upload review photo");
@@ -137,7 +140,10 @@ export const deleteReview = asyncWrapper(async (req, res) => {
   }
 
   // Check if the user is the owner of the review
-  if (review.user.toString() !== userId.toString()  && req.user.userType !== "admin") {
+  if (
+    review.user.toString() !== userId.toString() &&
+    req.user.userType !== "admin"
+  ) {
     throw new ApiError(403, "You are not authorized to delete this review");
   }
 
