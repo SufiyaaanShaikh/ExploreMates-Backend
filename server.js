@@ -14,6 +14,8 @@ import { destinationRoutes } from "./routes/destination.routes.js";
 dotenv.config({ path: "./.env" });
 const app = express();
 const allowedOrigins = [
+  "https://jprllxm5-3000.inc1.devtunnels.ms",
+  "http://localhost:3000",
   "https://explore-mate-live.vercel.app",
   "https://exploremates-backend-production.up.railway.app", // <-- add this
 ];

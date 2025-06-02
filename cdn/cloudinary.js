@@ -16,7 +16,11 @@ export const uploadonCloudinary = async (fileBuffer, mimeType) => {
     
     // Upload to Cloudinary using buffer
     const uploadResult = await cloudinary.uploader.upload(dataURI, {
-      resource_type: "auto",
+      resource_type: "image", // Specify "image" to apply image-specific transformations
+      transformation: [
+        { quality: "auto" },         // Compress intelligently
+        { fetch_format: "auto" },    // Convert to best format
+      ],
     });
     
     return uploadResult;
