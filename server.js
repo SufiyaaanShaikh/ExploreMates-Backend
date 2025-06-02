@@ -14,11 +14,21 @@ import { destinationRoutes } from "./routes/destination.routes.js";
 dotenv.config({ path: "./.env" });
 const app = express();
 const allowedOrigins = [
-  "http://localhost:3000",
   "https://explore-mate-live.vercel.app",
 ];
 
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
