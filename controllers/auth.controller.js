@@ -151,7 +151,7 @@ export const resendOTP = asyncWrapper(async (req, res, next) => {
   // Update OTP document
   otpDoc.otp = newOTP;
   otpDoc.attempts = 0; // Reset attempts
-  otpDoc.expiresAt = new Date(Date.now() + 5 * 60 * 1000); // Reset expiry to 5 minutes
+  otpDoc.expiresAt = new Date(Date.now() + 2 * 60 * 1000); // Reset expiry to 2 minutes
   
   await otpDoc.save();
 
