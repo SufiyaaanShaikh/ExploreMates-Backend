@@ -15,32 +15,26 @@ const schema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
+    username: {
+      type: String,
+      trim: true,
+      unique: true,
+    },
+    DOB: Date,
     password: {
       type: String,
       required: true,
     },
-    accessToken: {
-      type: String,
-    },
+    accessToken: String,
     phone: {
       type: Number,
       trim: true,
     },
-    address: {
-      type: String,
-    },
-    age: {
-      type: Number,
-    },
-    bio: {
-      type: String,
-    },
-    profilePhoto: {
-      type: String,
-    },
-    profilePhotoID: {
-      type: String,
-    },
+    address: String,
+    age: Number,
+    bio: String,
+    profilePhoto: String,
+    profilePhotoID: String,
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     userType: {

@@ -19,6 +19,7 @@ export const getAllUsers = asyncWrapper(async (req, res) => {
     searchQuery.$or = [
       { name: { $regex: search, $options: "i" } },
       { address: { $regex: search, $options: "i" } },
+      { username: { $regex: search, $options: "i" } },
     ];
   }
 

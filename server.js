@@ -14,14 +14,13 @@ import { destinationRoutes } from "./routes/destination.routes.js";
 dotenv.config({ path: "./.env" });
 const app = express();
 const allowedOrigins = [
-  "http://localhost:3000",
   "https://explore-mate-live.vercel.app",
-  "https://exploremates-backend-production.up.railway.app", // <-- add this
 ];
 
 app.use(
   cors({
-    origin: "https://explore-mate-live.vercel.app", 
+    origin:  allowedOrigins, 
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], 
     credentials: true, 
   })
 );
